@@ -14,16 +14,16 @@
             <section id="taskSection" class="taskSection">
 
                 <!-- Enter Task -->
-                <div id="submitTask" class="submitTask">
-                    <input type="text" placeholder="Enter Task">
-                    <button>Add</button>
+                <div id="submitTask">
+                    <input type="text" id="userInput" placeholder="Enter Task">
+                    <button id="submitTaskBtn">Add</button>
                 </div>
 
                 <!-- Task Display Section -->
                 <div id="taskList" class="taskList">
-                    <div id="task">
-                        <button id="taskStatusBtn">Check</button>
-                        <span id="task">Task #1</span>
+                    <div id="task" class="task">
+                        <input type="checkbox" id="taskCheckbox">
+                        <span id="taskData">Task #1</span>
                         <button id="upBtn">Up</button>
                         <button id="downBtn">Down</button>
                         <button id="delTask">X</button>
