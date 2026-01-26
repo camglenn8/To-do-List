@@ -24,6 +24,13 @@ submitTaskBtn.addEventListener("click", () =>
         return; 
     }
 
+
+
+    // **** TODO: Check to see if there are duplicates in the taskArray[]!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
+        // If so, prompt the user. 
+
+
+
     // Add this to the task[]. 
     taskArray.push(task); 
 
@@ -40,9 +47,8 @@ submitTaskBtn.addEventListener("click", () =>
 // taskList Click Event Listener (Event Delegation). 
 taskList.addEventListener("click", (e) => {
     // Access the .task div element (this will help you to find the taskData to move up/down/delete).
-    const task = e.target.closest(".task");
-    const taskData = task.querySelector(".taskData").textContent;
-
+    const task = e.target.closest(".task");                         // Find the closest parent element. 
+    const taskData = task.querySelector(".taskData").textContent;   // Get's the taskData child element.  
 
     // Find out which element/action was clicked.  
     const action = e.target.className; 
@@ -54,6 +60,7 @@ taskList.addEventListener("click", (e) => {
         
         case "downBtn":
             // Move the task down in the taskArray[].
+            moveTaskDown(taskData); 
             break;
 
         case "delTask":
@@ -69,6 +76,33 @@ taskList.addEventListener("click", (e) => {
             break;
     }
 }); 
+
+
+
+
+// Name             : moveTaskDown
+// Description      : The purpose of this function is to move a specific task down the taskList.  
+// Parameters       : String taskData   :   This is the task to be moved down the list. 
+// Return Values    : Void. 
+function moveTaskDown(taskData)
+{
+    // Find the current elements index in the taskArray[].
+    let currentIndex = taskArray.indexOf(taskData);  
+
+    // See if this is the last element in the array. 
+    if (Number(currentIndex) !== (taskArray.length - 1))   
+    {
+        // Move task down. 
+        let temp = taskArray[currentIndex + 1]; // Move the lower task to a temp variable. 
+        taskArray[currentIndex + 1] = taskData; // Replace the lower task with the currentIndex taskData. 
+        taskArray[currentIndex] = temp;         // Repalce the currentIndex with the temp value. 
+
+        // Update the taskList. 
+        updateTaskList() ;
+    }
+}
+
+
 
 
 
