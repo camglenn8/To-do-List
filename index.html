@@ -15,18 +15,18 @@
 
                 <!-- Enter Task -->
                 <div id="submitTask">
-                    <input type="text" id="userInput" placeholder="Enter Task">
+                    <input type="text" id="userInput" placeholder="Enter Task" onfocus="true"> 
                     <button id="submitTaskBtn">Add</button>
                 </div>
 
                 <!-- Task Display Section -->
                 <div id="taskList" class="taskList">
                     <div id="task" class="task">
-                        <input type="checkbox" id="taskCheckbox">
-                        <span id="taskData">Task #1</span>
-                        <button id="upBtn">Up</button>
-                        <button id="downBtn">Down</button>
-                        <button id="delTask">X</button>
+                        <input type="checkbox" id="taskCheckbox" hidden>
+                        <span id="taskData" hidden></span>
+                        <button id="upBtn" hidden></button>
+                        <button id="downBtn" hidden></button>
+                        <button id="delTask" hidden></button>
                     </div>
                 </div>
           </section>

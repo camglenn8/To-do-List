@@ -8,12 +8,12 @@ body
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #0C2C55;
+    background-color: #C9B59C;
 }
 
 .taskContainer
 {
-    background-color: #EDEDCE;
+    background-color: #F9F8F6;
     width: 90%;
     height: 90%;
     display: flex;
