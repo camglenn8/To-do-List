@@ -1,5 +1,6 @@
 // Constant variables.
-const invalidTask = ""; 
+const InvalidTask = "";
+const FirstTaskOnList = 0;  
 
 // HTML Selectors. 
 let userInput = document.getElementById("userInput"); 
@@ -17,7 +18,7 @@ submitTaskBtn.addEventListener("click", () =>
     let task = userInput.value.trim(); 
 
     // Check to see if user entered an empty task. 
-    if (task === invalidTask)
+    if (task === InvalidTask)
     {
         // Error: prompt user to enter a valid task. 
         console.log("ERROR: Enter a value"); 
@@ -56,6 +57,7 @@ taskList.addEventListener("click", (e) => {
     switch (action) {
         case "upBtn":
             // Move the task up in the taskArray[].
+            moveTaskUp(taskData);
             break;
         
         case "downBtn":
@@ -76,6 +78,32 @@ taskList.addEventListener("click", (e) => {
             break;
     }
 }); 
+
+
+
+// Name             : moveTaskUp
+// Description      : The purpose of this function is to move a specific task up the taskList.  
+// Parameters       : String taskData   :   This is the task to be moved up the list. 
+// Return Values    : Void. 
+function moveTaskUp(taskData)
+{
+    // Find the current index of the taskData. 
+    let currentTaskIndex = taskArray.indexOf(taskData);
+
+    // Check to see if the current task is the first on the task list.
+    if (currentTaskIndex !== FirstTaskOnList)
+    {
+        // Create a temp variable to hold the above task's value. 
+        let tempTask = taskArray[currentTaskIndex - 1]; 
+        // Copy the current taskData into the above tasks index. 
+        taskArray[currentTaskIndex - 1] = taskData; 
+        // Replace the current taskData value with the temp value.
+        taskArray[currentTaskIndex] = tempTask;   
+    }
+
+    // Update the task list. 
+    updateTaskList(); 
+}
 
 
 
