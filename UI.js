@@ -1,3 +1,6 @@
+// Imports
+import Task from "./task.js"; 
+
 // Constant variables.
 const InvalidTask = "";
 const FirstTaskOnList = 0;  
@@ -8,17 +11,19 @@ let submitTaskBtn = document.getElementById("submitTaskBtn");
 let taskList = document.getElementById("taskList"); 
 
 // Array for storing all tasks. 
-let taskArray = []; 
+let taskObject = {taskContent:"", index:"", isChecked:""};
+let taskIndex = 0; 
+let taskArray = [];  
 
 
 // sbumitTaskBtn Click Event Listener. 
 submitTaskBtn.addEventListener("click", () =>
 {
     // Get the userInput & clear the field. 
-    let task = userInput.value.trim(); 
+    let taskEntered = userInput.value.trim(); 
 
     // Check to see if user entered an empty task. 
-    if (task === InvalidTask)
+    if (taskEntered === InvalidTask)
     {
         // Error: prompt user to enter a valid task. 
         console.log("ERROR: Enter a value"); 
@@ -30,10 +35,13 @@ submitTaskBtn.addEventListener("click", () =>
     // **** TODO: Check to see if there are duplicates in the taskArray[]!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
         // If so, prompt the user. 
 
+    
+    // Store all task related data
+    let task = createTask(taskEntered); 
 
-
-    // Add this to the task[]. 
+    // Add this to the task[].  
     taskArray.push(task); 
+    console.log(taskArray);
 
     // Update the task list. 
     updateTaskList(); 
@@ -78,6 +86,26 @@ taskList.addEventListener("click", (e) => {
             break;
     }
 }); 
+
+
+
+// Name             : createTask
+// Description      : The purpose of this function is add all data to the task object and return the object.  
+// Parameters       : String taskContent   :   This is the tasks content to be added to the task object. 
+// Return Values    : Void. 
+function createTask(taskContent)
+{
+    // Instantiate a new Task object. 
+    let task = new Task(); 
+
+    // Add data to the Task object.
+    task.content = taskContent; 
+    console.log(task); 
+
+    return task; 
+}
+
+
 
 
 
@@ -156,7 +184,11 @@ function updateTaskList()
 {
      // Get the taskList section & clear all tasks.
     let taskList = document.getElementById("taskList"); 
+    taskList.classList.add("taskList"); 
     taskList.innerHTML = ""; 
+
+    // Is the current task checked? 
+    
 
     // Iterate through each task and update the taskList. 
     for (let taskData of taskArray)
@@ -167,11 +199,15 @@ function updateTaskList()
 
         // Add all elements/inner HTML that go within this div (checkbox, up/down buttons, & delete button). 
         task.innerHTML = 
-        `<input type="checkbox" class="taskCheckbox">
-        <span class="taskData">${taskData}</span>
-        <button class="upBtn">Up</button>
-        <button class="downBtn">Down</button>
-        <button class="delTask">X</button>`;
+        `<div class="taskLeftSide">
+            <input type="checkbox" class="taskCheckbox">
+            <span class="taskData">${taskData}</span>
+        </div>
+        <div class="taskRightSide">
+            <button class="upBtn">Up</button>
+            <button class="downBtn">Down</button>
+            <button class="delTask">X</button>
+        </div>`;
 
         // Append the task to the task div.
         taskList.appendChild(task); 

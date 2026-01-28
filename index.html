@@ -21,18 +21,23 @@
 
                 <!-- Task Display Section -->
                 <div id="taskList" class="taskList">
-                    <div id="task" class="task">
-                        <input type="checkbox" id="taskCheckbox" hidden>
-                        <span id="taskData" hidden></span>
-                        <button id="upBtn" hidden></button>
-                        <button id="downBtn" hidden></button>
-                        <button id="delTask" hidden></button>
+                    <div class="task">
+                        <div class="taskLeftSide">
+                            <input type="checkbox" class="taskCheckbox" hidden>
+                            <span class="taskData" hidden></span>
+                        </div>
+
+                        <div class="taskRightSide">
+                            <button class="upBtn" hidden></button>
+                            <button class="downBtn" hidden></button>
+                            <button class="delTask" hidden></button>
+                        </div>
                     </div>
                 </div>
           </section>
     </div>
 
     <!-- Link JS Code -->
-    <script src="tasks.js"></script>
+    <script src="UI.js" type="module"></script>
 </body>
 </html>
