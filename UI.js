@@ -11,8 +11,6 @@ let submitTaskBtn = document.getElementById("submitTaskBtn");
 let taskList = document.getElementById("taskList"); 
 
 // Array for storing all tasks. 
-let taskObject = {taskContent:"", index:"", isChecked:""};
-let taskIndex = 0; 
 let taskArray = [];  
 
 
@@ -36,12 +34,11 @@ submitTaskBtn.addEventListener("click", () =>
         // If so, prompt the user. 
 
     
-    // Store all task related data
-    let task = createTask(taskEntered); 
+    // Instantiate a new Task object. 
+    let task = new Task(taskEntered); 
 
-    // Add this to the task[].  
+    // Add the task to the task[].  
     taskArray.push(task); 
-    console.log(taskArray);
 
     // Update the task list. 
     updateTaskList(); 
@@ -55,9 +52,10 @@ submitTaskBtn.addEventListener("click", () =>
 
 // taskList Click Event Listener (Event Delegation). 
 taskList.addEventListener("click", (e) => {
-    // Access the .task div element (this will help you to find the taskData to move up/down/delete).
-    const task = e.target.closest(".task");                         // Find the closest parent element. 
-    const taskData = task.querySelector(".taskData").textContent;   // Get's the taskData child element.  
+    // Access the .task div element (this will help you to find the tasks unique ID to move up/down/delete).
+    const taskElement = e.target.closest(".task");   
+    const taskID = taskElement.dataset.id;  // Get the tasks ID.
+    let task = taskArray[taskID];           // Access the task object from the taskArrayp[].                           
 
     // Find out which element/action was clicked.  
     const action = e.target.className; 
@@ -65,17 +63,17 @@ taskList.addEventListener("click", (e) => {
     switch (action) {
         case "upBtn":
             // Move the task up in the taskArray[].
-            moveTaskUp(taskData);
+            // moveTaskUp(taskID);
             break;
         
         case "downBtn":
             // Move the task down in the taskArray[].
-            moveTaskDown(taskData); 
+            // moveTaskDown(taskID); 
             break;
 
         case "delTask":
             // Remove the task from the taskArray[]
-            deleteTask(taskData);
+            task.DeleteTask(taskID, taskArray);
             break;
 
         case "taskCheckbox":
@@ -85,26 +83,9 @@ taskList.addEventListener("click", (e) => {
         default:
             break;
     }
+
+    updateTaskList(); 
 }); 
-
-
-
-// Name             : createTask
-// Description      : The purpose of this function is add all data to the task object and return the object.  
-// Parameters       : String taskContent   :   This is the tasks content to be added to the task object. 
-// Return Values    : Void. 
-function createTask(taskContent)
-{
-    // Instantiate a new Task object. 
-    let task = new Task(); 
-
-    // Add data to the Task object.
-    task.content = taskContent; 
-    console.log(task); 
-
-    return task; 
-}
-
 
 
 
@@ -191,17 +172,18 @@ function updateTaskList()
     
 
     // Iterate through each task and update the taskList. 
-    for (let taskData of taskArray)
+    for (let task of taskArray)
     {
-        // Create an HTML element for the task & add the class.  
-        let task = document.createElement("div");
-        task.classList.add("task"); 
+        // Create an HTML element for the task, add the class, and a unique ID to the tasks dataset.  
+        let taskData = document.createElement("div");
+        taskData.classList.add("task"); 
+        taskData.dataset.id = task.index;   // This provides the DOM with the unique ID. 
 
         // Add all elements/inner HTML that go within this div (checkbox, up/down buttons, & delete button). 
-        task.innerHTML = 
+        taskData.innerHTML = 
         `<div class="taskLeftSide">
             <input type="checkbox" class="taskCheckbox">
-            <span class="taskData">${taskData}</span>
+            <span class="taskData">${task.content}</span>
         </div>
         <div class="taskRightSide">
             <button class="upBtn">Up</button>
@@ -210,7 +192,7 @@ function updateTaskList()
         </div>`;
 
         // Append the task to the task div.
-        taskList.appendChild(task); 
+        taskList.appendChild(taskData); 
     }   
 }
 

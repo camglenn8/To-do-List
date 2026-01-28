@@ -13,8 +13,6 @@ export default class Task
         this.#content = content; 
         this.#index = Task.totalTasks++;    
         this.#isChecked = false; 
-
-        console.log(Task.totalTasks); 
     }
 
     // Getters/Accesors
@@ -29,4 +27,32 @@ export default class Task
 
 
     // Methods
+
+
+    // Name             : deleteTask
+    // Description      : The purpose of this function is to find the task to be removed from the taskArray[] and update the taskList. 
+    // Parameters       : String taskData   :   This is the task to be removed. 
+    // Return Values    : Void. 
+    DeleteTask(taskID, listOfTasks)
+    {
+        // Remove from the taskArray[] list. 
+        listOfTasks.splice(taskID, 1);  
+
+        // Get the # of elements within the listOfTasks[]. 
+        let totalTasks = listOfTasks.length; 
+
+        // Re-index all elements in the array.
+        for (let i = 0; i < totalTasks; i++)
+        {
+            listOfTasks[i].index = i; 
+        }
+
+        // Decrement the classes totalTasks by 1. 
+        Task.totalTasks--;   
+        
+        console.log(listOfTasks);
+        console.log(Task.totalTasks);
+
+        return; 
+    }
 }
