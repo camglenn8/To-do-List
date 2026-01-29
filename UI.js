@@ -3,7 +3,6 @@ import Task from "./task.js";
 
 // Constant variables.
 const InvalidTask = "";
-const FirstTaskOnList = 0;  
 
 // HTML Selectors. 
 let userInput = document.getElementById("userInput"); 
@@ -89,9 +88,9 @@ taskList.addEventListener("click", (e) => {
 
 // Name             : updateTaskList
 // Description      : The purpose of this function is to clear and update the current taskList with all tasks within taskArray[]. 
-// Parameters       : number taskId         :   This is the current tasks index within the task list. 
+// Parameters       : Void. 
 // Return Values    : Void. 
-function updateTaskList(taskID)
+function updateTaskList()
 {
      // Get the taskList section & clear all tasks.
     let taskList = document.getElementById("taskList"); 
@@ -101,13 +100,6 @@ function updateTaskList(taskID)
     // Iterate through each task and update the taskList. 
     for (let task of taskArray)
     {
-        // Check to see if the current task is checked.
-        let checked = ""; 
-        if (task.isChecked === true)
-        {
-            checked = "checked";
-        }
-
         // Create an HTML element for the task, add the class, and a unique ID to the tasks dataset.  
         let taskData = document.createElement("div");
         taskData.classList.add("task"); 
@@ -116,8 +108,8 @@ function updateTaskList(taskID)
         // Add all elements/inner HTML that go within this div (checkbox, up/down buttons, & delete button). 
         taskData.innerHTML = 
         `<div class="taskLeftSide">
-            <input type="checkbox" class="taskCheckbox" ${checked}>
-            <span class="taskData">${task.content}</span>
+            <input type="checkbox" class="taskCheckbox" ${task.isChecked ? "checked" : ""}>
+            <span class="${task.isChecked ? "completed" : ""}">${task.content}</span>
         </div>
         <div class="taskRightSide">
             <button class="upBtn">Up</button>
@@ -145,12 +137,3 @@ userInput.addEventListener("keydown", (e) => {
         submitTaskBtn.click(); 
     }
 });
-
-
-
-
-
-// Name             : checkbox Event Listener
-// Description      : This event listener gets triggered anytime a user hits toggles the checkbox on a task.  
-// Parameters       : Void.
-// Return Values    : Void. 

@@ -4,7 +4,7 @@ export default class Task
     static totalTasks = 0;  
     #content = "";
     #index = 0;  
-    #isChecked = false;  
+    #isChecked = "";  
     
 
     // Constructors
@@ -43,7 +43,7 @@ export default class Task
         {
             task.isChecked = false;
         }
-        console.log(task);
+        
         return;
     }
 
