@@ -54,8 +54,8 @@ submitTaskBtn.addEventListener("click", () =>
 taskList.addEventListener("click", (e) => {
     // Access the .task div element (this will help you to find the tasks unique ID to move up/down/delete).
     const taskElement = e.target.closest(".task");   
-    const taskID = taskElement.dataset.id;  // Get the tasks ID.
-    let task = taskArray[taskID];           // Access the task object from the taskArrayp[].                           
+    const taskID = Number(taskElement.dataset.id);  // Get the tasks ID.
+    let task = taskArray[taskID];                   // Access the task object from the taskArrayp[].                           
 
     // Find out which element/action was clicked.  
     const action = e.target.className; 
@@ -68,7 +68,7 @@ taskList.addEventListener("click", (e) => {
         
         case "downBtn":
             // Move the task down in the taskArray[].
-            // moveTaskDown(taskID); 
+            task.MoveTaskDown(taskID, taskArray); 
             break;
 
         case "delTask":
@@ -112,46 +112,6 @@ function moveTaskUp(taskData)
 
     // Update the task list. 
     updateTaskList(); 
-}
-
-
-
-
-// Name             : moveTaskDown
-// Description      : The purpose of this function is to move a specific task down the taskList.  
-// Parameters       : String taskData   :   This is the task to be moved down the list. 
-// Return Values    : Void. 
-function moveTaskDown(taskData)
-{
-    // Find the current elements index in the taskArray[].
-    let currentIndex = taskArray.indexOf(taskData);  
-
-    // See if this is the last element in the array. 
-    if (Number(currentIndex) !== (taskArray.length - 1))   
-    {
-        // Move task down. 
-        let temp = taskArray[currentIndex + 1]; // Move the lower task to a temp variable. 
-        taskArray[currentIndex + 1] = taskData; // Replace the lower task with the currentIndex taskData. 
-        taskArray[currentIndex] = temp;         // Repalce the currentIndex with the temp value. 
-
-        // Update the taskList. 
-        updateTaskList() ;
-    }
-}
-
-
-
-
-
-// Name             : deleteTask
-// Description      : The purpose of this function is to find the task to be removed from the taskArray[] and update the taskList. 
-// Parameters       : String taskData   :   This is the task to be removed. 
-// Return Values    : Void. 
-function deleteTask(taskData)
-{
-    let index = taskArray.indexOf(taskData); 
-    taskArray.splice(index, 1); 
-    updateTaskList();
 }
 
 
