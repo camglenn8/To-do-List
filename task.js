@@ -28,6 +28,27 @@ export default class Task
 
     // Methods
 
+    // Name             : ToggleCheckbox
+    // Description      : The purpose of this method is to toggle the state of the current tasks checkbox.
+    // Parameters       : {Task}    :   This is an instance of a Task object. 
+    // Return Values    : Void. 
+    ToggleCheckbox(task)
+    {
+        // Toggle the checkbox. 
+        if (task.isChecked === false)
+        {
+            task.isChecked = true;
+        }
+        else
+        {
+            task.isChecked = false;
+        }
+        console.log(task);
+        return;
+    }
+
+
+
 
     // Name             : DeleteTask
     // Description      : The purpose of this method is to remove the task from the list of tasks. s

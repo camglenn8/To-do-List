@@ -28,12 +28,6 @@ submitTaskBtn.addEventListener("click", () =>
         return; 
     }
 
-
-
-    // **** TODO: Check to see if there are duplicates in the taskArray[]!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
-        // If so, prompt the user. 
-
-    
     // Instantiate a new Task object. 
     let task = new Task(taskEntered); 
 
@@ -77,9 +71,11 @@ taskList.addEventListener("click", (e) => {
             break;
 
         case "taskCheckbox":
-            // Strike through the task data. 
+            // Toggle the checkbox's state. 
+            task.ToggleCheckbox(task); 
+            
             break;
-    
+            
         default:
             break;
     }
@@ -90,50 +86,28 @@ taskList.addEventListener("click", (e) => {
 
 
 
-// Name             : moveTaskUp
-// Description      : The purpose of this function is to move a specific task up the taskList.  
-// Parameters       : String taskData   :   This is the task to be moved up the list. 
-// Return Values    : Void. 
-function moveTaskUp(taskData)
-{
-    // Find the current index of the taskData. 
-    let currentTaskIndex = taskArray.indexOf(taskData);
-
-    // Check to see if the current task is the first on the task list.
-    if (currentTaskIndex !== FirstTaskOnList)
-    {
-        // Create a temp variable to hold the above task's value. 
-        let tempTask = taskArray[currentTaskIndex - 1]; 
-        // Copy the current taskData into the above tasks index. 
-        taskArray[currentTaskIndex - 1] = taskData; 
-        // Replace the current taskData value with the temp value.
-        taskArray[currentTaskIndex] = tempTask;   
-    }
-
-    // Update the task list. 
-    updateTaskList(); 
-}
-
-
-
 
 // Name             : updateTaskList
 // Description      : The purpose of this function is to clear and update the current taskList with all tasks within taskArray[]. 
-// Parameters       : Void.
+// Parameters       : number taskId         :   This is the current tasks index within the task list. 
 // Return Values    : Void. 
-function updateTaskList()
+function updateTaskList(taskID)
 {
      // Get the taskList section & clear all tasks.
     let taskList = document.getElementById("taskList"); 
     taskList.classList.add("taskList"); 
     taskList.innerHTML = ""; 
 
-    // Is the current task checked? 
-    
-
     // Iterate through each task and update the taskList. 
     for (let task of taskArray)
     {
+        // Check to see if the current task is checked.
+        let checked = ""; 
+        if (task.isChecked === true)
+        {
+            checked = "checked";
+        }
+
         // Create an HTML element for the task, add the class, and a unique ID to the tasks dataset.  
         let taskData = document.createElement("div");
         taskData.classList.add("task"); 
@@ -142,7 +116,7 @@ function updateTaskList()
         // Add all elements/inner HTML that go within this div (checkbox, up/down buttons, & delete button). 
         taskData.innerHTML = 
         `<div class="taskLeftSide">
-            <input type="checkbox" class="taskCheckbox">
+            <input type="checkbox" class="taskCheckbox" ${checked}>
             <span class="taskData">${task.content}</span>
         </div>
         <div class="taskRightSide">
@@ -171,3 +145,12 @@ userInput.addEventListener("keydown", (e) => {
         submitTaskBtn.click(); 
     }
 });
+
+
+
+
+
+// Name             : checkbox Event Listener
+// Description      : This event listener gets triggered anytime a user hits toggles the checkbox on a task.  
+// Parameters       : Void.
+// Return Values    : Void. 
