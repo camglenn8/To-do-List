@@ -1,7 +1,7 @@
 export default class Task
 {
     // Data Members
-    static totalTasks = 0; 
+    static totalTasks = 0;  
     #content = "";
     #index = 0;  
     #isChecked = false;  
@@ -60,7 +60,7 @@ export default class Task
     MoveTaskDown(taskID, taskArray)
     {
         // Check to see if the current task is the last in the task list. 
-        let lastTask = taskArray.length;
+        let lastTask = taskArray.length - 1;
         if (taskID !== lastTask)
         {
             // Create a temp variable to hold the lower task. 
@@ -72,10 +72,39 @@ export default class Task
             
             this.#ShuffleTaskList(taskArray); 
         }
-
-        console.log(taskArray);
+        
         return;  
     }
+
+
+
+
+
+    // Name             : moveTaskUp
+    // Description      : The purpose of this method is to move a specific task up the taskList.  
+    // Parameters       : number taskID         :   This is the taskArray index. 
+    //                  : [string] taskArray    :   This is the array of tasks.
+    // Return Values    : Void. 
+    MoveTaskUp(taskID, taskArray)
+    {
+        let firstTask = 0; 
+
+        // Check to see if the current task is the first in the task list. 
+        if (taskID !== firstTask)
+        {
+            // Create a temp variable to hold the lower task. 
+            let temp = taskArray[taskID - 1]; 
+            // Copy the current task into the lower tasks spot.
+            taskArray[taskID - 1] = taskArray[taskID];   
+            // Copy the temp variable into the current tasks spot.
+            taskArray[taskID] = temp;  
+            
+            this.#ShuffleTaskList(taskArray); 
+        }
+
+        return;  
+    }
+
 
 
 

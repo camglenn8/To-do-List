@@ -63,7 +63,7 @@ taskList.addEventListener("click", (e) => {
     switch (action) {
         case "upBtn":
             // Move the task up in the taskArray[].
-            // moveTaskUp(taskID);
+            task.MoveTaskUp(taskID, taskArray);
             break;
         
         case "downBtn":
