@@ -43,7 +43,7 @@ export default class Task
         {
             task.isChecked = false;
         }
-        
+
         return;
     }
 
@@ -73,7 +73,7 @@ export default class Task
 
 
 
-    // Name             : moveTaskDown
+    // Name             : MoveTaskDown
     // Description      : The purpose of this method is to move a specific task down the taskList.  
     // Parameters       : number taskID         :   This is the taskArray index. 
     //                  : [string] taskArray    :   This is the array of tasks.
@@ -101,7 +101,7 @@ export default class Task
 
 
 
-    // Name             : moveTaskUp
+    // Name             : MoveTaskUp
     // Description      : The purpose of this method is to move a specific task up the taskList.  
     // Parameters       : number taskID         :   This is the taskArray index. 
     //                  : [string] taskArray    :   This is the array of tasks.
@@ -125,6 +125,32 @@ export default class Task
 
         return;  
     }
+
+
+
+
+
+    
+    // Name             : DuplicateTask
+    // Description      : The purpose of this method is to verify if there's duplicates  within the task List.
+    // Parameters       : string taskEntered    :   This is the task the user is trying to enter. 
+    //                  : [string] taskLst      :   This is the list of all tasks.
+    // Return Values    : bool true :   The task already exists within the task list. Otherwise, false. 
+    DuplicateTask(taskEntered, taskList)
+    {
+        // Iterate through the tasks within the task list and compare them to the taskEntered. 
+        for (let task of taskList)
+        {
+            // Capitalize both taskEntered & current task being compared to.
+            if (task.content.toUpperCase() === taskEntered.toUpperCase()) 
+            {
+                return true;
+            }
+        }
+
+        return false; 
+    }
+
 
 
 

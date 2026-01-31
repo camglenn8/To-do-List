@@ -17,7 +17,7 @@ let taskArray = [];
 submitTaskBtn.addEventListener("click", () =>
 {
     // Get the userInput & clear the field. 
-    let taskEntered = userInput.value.trim(); 
+    let taskEntered = userInput.value.trim();
 
     // Check to see if user entered an empty task. 
     if (taskEntered === InvalidTask)
@@ -30,8 +30,19 @@ submitTaskBtn.addEventListener("click", () =>
     // Instantiate a new Task object. 
     let task = new Task(taskEntered); 
 
+    // Check to see if there's a duplicate task in the task list.
+    let result = task.DuplicateTask(taskEntered, taskArray);  
+    if (result === true)
+    {
+        console.log(`ERROR: ${taskEntered} already exists.`); 
+          // Reset the userInput field.
+        userInput.value = ""; 
+        userInput.focus(); 
+        return; 
+    }
+
     // Add the task to the task[].  
-    taskArray.push(task); 
+    taskArray.push(task);  
 
     // Update the task list. 
     updateTaskList(); 
@@ -86,6 +97,22 @@ taskList.addEventListener("click", (e) => {
 
 
 
+// Name             : userInput Event Listener
+// Description      : This event listener gets triggered anytime a user hits "Enter" on the keyboard while on the userInput field. 
+// Parameters       : Void.
+// Return Values    : Void. 
+userInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter")
+    {
+        // trigger a click event. 
+        submitTaskBtn.click(); 
+    }
+});
+
+
+
+
+
 // Name             : updateTaskList
 // Description      : The purpose of this function is to clear and update the current taskList with all tasks within taskArray[]. 
 // Parameters       : Void. 
@@ -109,7 +136,7 @@ function updateTaskList()
         taskData.innerHTML = 
         `<div class="taskLeftSide">
             <input type="checkbox" class="taskCheckbox" ${task.isChecked ? "checked" : ""}>
-            <span class="${task.isChecked ? "completed" : ""}">${task.content}</span>
+            <span class="taskContent${task.isChecked ? " completed" : ""}">${task.content}</span>
         </div>
         <div class="taskRightSide">
             <button class="upBtn">Up</button>
@@ -121,19 +148,3 @@ function updateTaskList()
         taskList.appendChild(taskData); 
     }   
 }
-
-
-
-
-
-// Name             : userInput Event Listener
-// Description      : This event listener gets triggered anytime a user hits "Enter" on the keyboard while on the userInput field. 
-// Parameters       : Void.
-// Return Values    : Void. 
-userInput.addEventListener("keydown", (e) => {
-    if (e.key === "Enter")
-    {
-        // trigger a click event. 
-        submitTaskBtn.click(); 
-    }
-});

@@ -17,6 +17,7 @@
                 <div id="submitTask">
                     <input type="text" id="userInput" placeholder="Enter Task" onfocus="true"> 
                     <button id="submitTaskBtn">Add</button>
+                    <div id="errorMsg" class="errorMsg">Error</div>
                 </div>
 
                 <!-- Task Display Section -->
@@ -24,7 +25,7 @@
                     <div class="task">
                         <div class="taskLeftSide">
                             <input type="checkbox" class="taskCheckbox" hidden>
-                            <span class="taskData" hidden></span>
+                            <span class="taskContent" hidden></span>
                         </div>
 
                         <div class="taskRightSide">
