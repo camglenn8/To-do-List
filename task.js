@@ -65,30 +65,4 @@ export default class Task
 
     //     return; 
     // }
-
-
-
-
-
-    // Name             : MoveTaskDown
-    // Description      : The purpose of this method is to move a specific task down the taskList.  
-    // Parameters       : number taskID         :   This is the taskArray index. 
-    //                  : [string] taskArray    :   This is the array of tasks.
-    // Return Values    : Void. 
-    // MoveTaskDown(taskID, taskArray)
-    // {
-    //     // Check to see if the current task is the last in the task list. 
-    //     let lastTask = taskArray.length - 1;
-    //     if (taskID !== lastTask)
-    //     {
-    //         // Create a temp variable to hold the lower task. 
-    //         let temp = taskArray[taskID + 1]; 
-    //         // Copy the current task into the lower tasks spot.
-    //         taskArray[taskID + 1] = taskArray[taskID];   
-    //         // Copy the temp variable into the current tasks spot.
-    //         taskArray[taskID] = temp;  
-    //     }
-        
-    //     return;  
-    // }
 }

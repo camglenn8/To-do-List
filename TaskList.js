@@ -41,6 +41,35 @@ export default class TaskList
 
 
 
+       // Name             : MoveTaskDown
+    // Description      : The purpose of this method is to move a specific task down the taskList.  
+    // Parameters       : number taskID         :   This is the taskArray index. 
+    //                  : [string] taskArray    :   This is the array of tasks.
+    // Return Values    : Void. 
+    MoveTaskDown(taskID)
+    {
+        // Check to see if the current task is the last in the task list. 
+        let lastTask = this.#tasks.length - 1;
+        if (taskID !== lastTask)
+        {
+            // Create a temp variable to hold the lower task. 
+            let temp = this.#tasks[taskID + 1]; 
+            // Copy the current task into the lower tasks spot.
+            this.#tasks[taskID + 1] = this.#tasks[taskID];   
+            // Copy the temp variable into the current tasks spot.
+            this.#tasks[taskID] = temp; 
+            
+            // Re-index the task list.
+            this.#ShuffleTaskList(); 
+        }
+        
+         return;  
+    }
+
+
+
+
+
     // Name             : MoveTaskUp
     // Description      : The purpose of this method is to move a specific task up in the taskList.  
     // Parameters       : number taskID         :   This is the current tasks ID.  
@@ -59,12 +88,13 @@ export default class TaskList
             // Copy the temp variable into the current tasks spot.
             this.#tasks[taskID] = temp;  
             
+            // Re-index the task list.
             this.#ShuffleTaskList(); 
         }
 
         return;  
     }
-    
+
 
 
 

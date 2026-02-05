@@ -55,14 +55,13 @@ taskListElement.addEventListener("click", (e) => {
 
     switch (action) {
         case "upBtn":
-            // Move the task up in the taskArray[].
-            console.log(taskList); 
+            // Move the task up in the taskList.
             taskList.MoveTaskUp(taskID); 
             break;
         
         case "downBtn":
-            // Move the task down in the taskArray[].
-            task.MoveTaskDown(taskID, taskArray); 
+            // Move the task down in the taskList.
+            taskList.MoveTaskDown(taskID); 
             break;
 
         case "delTask":
