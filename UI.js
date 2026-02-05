@@ -71,8 +71,8 @@ taskListElement.addEventListener("click", (e) => {
 
         case "taskCheckbox":
             // Toggle the checkbox's state. 
+            let task = taskList.tasks[taskID];
             task.ToggleCheckbox(task); 
-            
             break;
             
         default:
