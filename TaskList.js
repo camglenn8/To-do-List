@@ -40,11 +40,28 @@ export default class TaskList
 
 
 
+    
+    // Name             : DeleteTask
+    // Description      : The purpose of this method is to remove the task from the list of tasks. 
+    // Parameters       : String taskID     :   This is the task to be removed. 
+    // Return Values    : Void. 
+    DeleteTask(taskID)
+    {
+        // Remove from the array of tasks. 
+        this.#tasks.splice(taskID, 1);
+        
+        // Shuffle the task list.
+        this.#ShuffleTaskList(); 
+        return; 
+    }
+
+
+
+
 
        // Name             : MoveTaskDown
     // Description      : The purpose of this method is to move a specific task down the taskList.  
     // Parameters       : number taskID         :   This is the taskArray index. 
-    //                  : [string] taskArray    :   This is the array of tasks.
     // Return Values    : Void. 
     MoveTaskDown(taskID)
     {
@@ -58,7 +75,7 @@ export default class TaskList
             this.#tasks[taskID + 1] = this.#tasks[taskID];   
             // Copy the temp variable into the current tasks spot.
             this.#tasks[taskID] = temp; 
-            
+
             // Re-index the task list.
             this.#ShuffleTaskList(); 
         }

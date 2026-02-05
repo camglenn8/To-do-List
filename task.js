@@ -44,25 +44,4 @@ export default class Task
 
         return;
     }
-
-
-
-
-    // Name             : DeleteTask
-    // Description      : The purpose of this method is to remove the task from the list of tasks. s
-    // Parameters       : String taskID     :   This is the task to be removed. 
-    //                  : [string] taskList :   This is the list of tasks.
-    // Return Values    : Void. 
-    // DeleteTask(taskID, taskList)
-    // {
-    //     // Remove from the taskArray[] list. 
-    //     taskList.splice(taskID, 1);  
-
-    //     // Shuffle the task list.
-        
-    //     // Decrement the classes totalTasks by 1. 
-    //     Task.totalTasks--;   
-
-    //     return; 
-    // }
 }

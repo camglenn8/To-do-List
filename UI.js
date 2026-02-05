@@ -65,8 +65,8 @@ taskListElement.addEventListener("click", (e) => {
             break;
 
         case "delTask":
-            // Remove the task from the taskArray[]
-            task.DeleteTask(taskID, taskArray);
+            // Remove the task from the taskList.
+            taskList.DeleteTask(taskID);
             break;
 
         case "taskCheckbox":
