@@ -8,14 +8,15 @@ body
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #C9B59C;
+    background-color: #A5C89E;
 }
 
 .taskContainer
 {
     background-color: #F9F8F6;
-    width: 90%;
+    width: 40%;
     height: 90%;
+    border-radius: 2%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -27,19 +28,27 @@ body
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 70%;
+    width: 100%;
 }
 
 .submitTask
 {
+    display: flex;
+    justify-content: center;
+    width: 100%;
     margin: 0 0 1em 0;
+}
+
+.submitTaskBtn
+{
+    margin: 0 0 0 0.5em;
 }
 
 .taskList
 {
     display: flex;
     flex-direction: column;
-    width: 60%;
+    width: 100%; 
     margin: 1.5em 0 0 0;
 }
 
@@ -47,6 +56,13 @@ body
 {
     display: flex;
     justify-content: space-between;
+    margin: 0.5em 0;
+    padding: 0.5em;
+}
+
+.task:hover
+{
+    background-color: #ebeae7; 
 }
 
 .completed

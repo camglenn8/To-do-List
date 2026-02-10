@@ -46,12 +46,22 @@ submitTaskBtn.addEventListener("click", () =>
 
 // taskList Click Event Listener (Event Delegation). 
 taskListElement.addEventListener("click", (e) => {
-    // Access the .task div element (this will help you to find the tasks unique ID to move up/down/delete).
-    const taskElement = e.target.closest(".task");   
-    const taskID = Number(taskElement.dataset.id);  // Get the tasks ID.                           
 
-    // Find out which element/action was clicked.  
-    const action = e.target.className; 
+    // Figure out which task was clicked and get it's data to get taskID & process the action. 
+    let action = ""; 
+    let taskID = ""; 
+    try 
+    {
+        // Access the .task div element (this will help you to find the tasks unique ID to move up/down/delete).
+        const taskElement = e.target.closest(".task");     
+        taskID = Number(taskElement.dataset.id);  // Get the tasks ID.     
+        action = e.target.dataset.action; // Find out which element/action was clicked by accessing the DOM data attribute.  
+    } 
+    catch (error) 
+    {
+        console.log(error);     
+    }
+
 
     switch (action) {
         case "upBtn":
@@ -76,7 +86,7 @@ taskListElement.addEventListener("click", (e) => {
             break;
             
         default:
-            break;
+            return;
     }
 
     updateTaskList(); 
@@ -108,13 +118,13 @@ function updateTaskList()
         // Add all elements/inner HTML that go within this div (checkbox, up/down buttons, & delete button). 
         taskData.innerHTML = 
         `<div class="taskLeftSide">
-            <input type="checkbox" class="taskCheckbox" ${task.isChecked ? "checked" : ""}>
+            <input type="checkbox" class="taskCheckbox" data-action="toggleCheck" ${task.isChecked ? "checked" : ""}>
             <span class="taskContent${task.isChecked ? " completed" : ""}">${task.content}</span>
         </div>
         <div class="taskRightSide">
-            <button class="upBtn">Up</button>
-            <button class="downBtn">Down</button>
-            <button class="delTask">X</button>
+            <button class="upBtn" data-action="upBtn">Up</button>
+            <button class="downBtn" data-action="downBtn">Down</button>
+            <button class="delTask" data-action="delTask">X</button>
         </div>`;
 
         // Append the task to the task div.
