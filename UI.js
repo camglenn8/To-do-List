@@ -53,15 +53,15 @@ taskListElement.addEventListener("click", (e) => {
     try 
     {
         // Access the .task div element (this will help you to find the tasks unique ID to move up/down/delete).
-        const taskElement = e.target.closest(".task");     
+        const taskElement = e.target.closest("[data-id]");     
         taskID = Number(taskElement.dataset.id);  // Get the tasks ID.     
-        action = e.target.dataset.action; // Find out which element/action was clicked by accessing the DOM data attribute.  
+        let actionBtn = e.target.closest("[data-action]"); // Find out which element/action was clicked by accessing the DOM data attribute.  
+        action = actionBtn.dataset.action; 
     } 
     catch (error) 
     {
-        console.log(error);     
+        return;   
     }
-
 
     switch (action) {
         case "upBtn":
@@ -79,7 +79,7 @@ taskListElement.addEventListener("click", (e) => {
             taskList.DeleteTask(taskID);
             break;
 
-        case "taskCheckbox":
+        case "toggleCheck":
             // Toggle the checkbox's state. 
             let task = taskList.tasks[taskID];
             task.ToggleCheckbox(task); 
@@ -122,9 +122,9 @@ function updateTaskList()
             <span class="taskContent${task.isChecked ? " completed" : ""}">${task.content}</span>
         </div>
         <div class="taskRightSide">
-            <button class="upBtn" data-action="upBtn">Up</button>
-            <button class="downBtn" data-action="downBtn">Down</button>
-            <button class="delTask" data-action="delTask">X</button>
+            <button class="actionBtn" data-action="upBtn" title="Move Task Up">&#8593</button>
+            <button class="actionBtn" data-action="downBtn" title="Move Task Down">&#8595</button>
+            <button class="actionBtn" data-action="delTask" title="Delete Task">&#10006</button>
         </div>`;
 
         // Append the task to the task div.

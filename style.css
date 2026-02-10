@@ -65,6 +65,12 @@ body
     background-color: #ebeae7; 
 }
 
+.task:hover .actionBtn
+{
+    visibility: visible;
+    cursor: pointer;
+}
+
 .completed
 {
     text-decoration: line-through;
@@ -74,6 +80,7 @@ body
 {
     display: flex;
     gap: 0.5em;
+    visibility: hidden;
 }
 
 .taskLeftSide
@@ -86,3 +93,4 @@ body
 {
     display: none;
 }
+
